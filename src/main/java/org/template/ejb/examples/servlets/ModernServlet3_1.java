@@ -7,19 +7,13 @@ package org.template.ejb.examples.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.ejb.CreateException;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.template.ejb.examples.ejb.interfaces.Hello;
-import org.template.ejb.examples.ejb.interfaces.HelloHome;
+import org.template.ejb.examples.ejb.interfaces.Hello31;
 
 /**
  *
@@ -27,12 +21,16 @@ import org.template.ejb.examples.ejb.interfaces.HelloHome;
  */
 @WebServlet(name = "ModernServlet31", urlPatterns = {"/modern"})
 public class ModernServlet3_1 extends HttpServlet {
+	
+	@EJB
+	private Hello31 hello;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		final String parameterValue = req.getParameter("name");
 		final PrintWriter writer = resp.getWriter();
-		writer.println("Modern servlet got " + parameterValue);
+		writer.println("Modern servlet got " + parameterValue+". "+hello.getGreeting());
+		hello.setGreeting(parameterValue);
 		writer.flush();
 	}
 

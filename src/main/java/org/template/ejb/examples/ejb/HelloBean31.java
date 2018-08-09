@@ -6,16 +6,16 @@
 package org.template.ejb.examples.ejb;
 
 import javax.ejb.Stateful;
-import org.template.ejb.examples.ejb.interfaces.Hello;
+import org.template.ejb.examples.ejb.interfaces.Hello31;
 
 /**
  *
  * @author dnikiforov
  */
 @Stateful
-public class HelloBean31 implements Hello {
+public class HelloBean31 implements Hello31 {
 
-	private String greeting;
+	private String greeting = "3.1 release";
 	
 	@Override
 	public String getGreeting() {

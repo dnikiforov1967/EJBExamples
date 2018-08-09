@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.template.ejb.examples.ejb.interfaces.Hello;
 import org.template.ejb.examples.ejb.interfaces.HelloHome;
 
@@ -25,17 +26,22 @@ import org.template.ejb.examples.ejb.interfaces.HelloHome;
  * @author dnikiforov
  */
 public class ClassicServlet extends HttpServlet {
-
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		InitialContext jndiContext;
 		try {
-			jndiContext = new InitialContext();
-			HelloHome home = (HelloHome) jndiContext.lookup("java:module/HelloBean!" + HelloHome.class.getName());
-			Hello hello = home.create();
+			final HttpSession session = req.getSession(true);
+			Hello hello = (Hello) session.getAttribute("helloBean");
+			if (hello == null) {
+				InitialContext jndiContext = new InitialContext();
+				HelloHome home = (HelloHome) jndiContext.lookup("java:module/HelloBean!" + HelloHome.class.getName());
+				hello = home.create();
+				session.setAttribute("helloBean", hello);
+			}
 			final String parameterValue = req.getParameter("name");
 			final PrintWriter writer = resp.getWriter();
-			writer.println("Classic servlet got " + parameterValue+". "+hello.getGreeting());
+			writer.println("Classic servlet got " + parameterValue + ". " + hello.getGreeting());
+			hello.setGreeting(parameterValue);
 			writer.flush();
 		} catch (NamingException ex) {
 			Logger.getLogger(ClassicServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -45,5 +51,5 @@ public class ClassicServlet extends HttpServlet {
 			Logger.getLogger(ClassicServlet.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-
+	
 }

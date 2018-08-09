@@ -23,9 +23,8 @@ public class ClassicServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		final String parameterValue = req.getParameter("name");
 		final PrintWriter writer = resp.getWriter();
-		writer.println("I have got "+parameterValue);
+		writer.println("Classic servlet got "+parameterValue);
 		writer.flush();
-		super.doGet(req, resp);
 	}
 	
 	

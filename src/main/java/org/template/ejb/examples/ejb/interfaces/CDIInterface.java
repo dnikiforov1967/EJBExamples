@@ -6,11 +6,12 @@
 package org.template.ejb.examples.ejb.interfaces;
 
 /**
- * 1.0 style
- * 
+ *
  * @author dnikiforov
  */
-public interface Hello {
-	String getGreeting();
-	void setGreeting(String greeting);
+public interface CDIInterface {
+
+	void setMessage(String message);
+
+	String getMessage();
 }

@@ -11,6 +11,7 @@ import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.template.ejb.examples.ejb.interfaces.CDIInterface;
 import org.template.ejb.examples.ejb.interfaces.Hello31;
 
 /**
@@ -28,6 +30,9 @@ import org.template.ejb.examples.ejb.interfaces.Hello31;
 @WebServlet(name = "ModernServlet31", urlPatterns = {"/modern"})
 public class ModernServlet3_1 extends HttpServlet {
 
+	@Inject
+	private CDIInterface cdiInterface;
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -41,7 +46,9 @@ public class ModernServlet3_1 extends HttpServlet {
 			final String parameterValue = req.getParameter("name");
 			final PrintWriter writer = resp.getWriter();
 			writer.println("Modern servlet got " + parameterValue + ". " + hello.getGreeting());
+			writer.println("Modern servlet got " + parameterValue + ". " + cdiInterface.getMessage());
 			hello.setGreeting(parameterValue);
+			cdiInterface.setMessage(parameterValue);
 			writer.flush();
 		} catch (NamingException ex) {
 			Logger.getLogger(ClassicServlet.class.getName()).log(Level.SEVERE, null, ex);

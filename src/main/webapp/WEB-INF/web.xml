@@ -9,4 +9,17 @@
             30
         </session-timeout>
     </session-config>
+	
+	<servlet>
+		<servlet-class>org.template.ejb.examples.ClassicServlet</servlet-class>
+		<display-name>Classic Servlet</display-name>
+		<load-on-startup>0</load-on-startup>
+		<servlet-name>classicServlet</servlet-name>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>classicServlet</servlet-name>
+		<url-pattern>/classic</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

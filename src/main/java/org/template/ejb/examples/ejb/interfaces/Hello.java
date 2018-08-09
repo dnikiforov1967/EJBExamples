@@ -8,9 +8,11 @@ package org.template.ejb.examples.ejb.interfaces;
 import javax.ejb.EJBObject;
 
 /**
- *
+ * 1.0 style
+ * 
  * @author dnikiforov
  */
-public interface Hello extends EJBObject {
-	String saySomething();
+public interface Hello {
+	String getGreeting();
+	void setGreeting(String greeting);
 }

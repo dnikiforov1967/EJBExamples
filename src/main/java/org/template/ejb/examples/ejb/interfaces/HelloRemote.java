@@ -5,17 +5,11 @@
  */
 package org.template.ejb.examples.ejb.interfaces;
 
-import java.rmi.RemoteException;
-import javax.ejb.CreateException;
-import javax.ejb.EJBHome;
+import javax.ejb.EJBObject;
 
 /**
- * 1.0 style
- * 
+ *
  * @author dnikiforov
  */
-public interface HelloHome extends EJBHome {
-  
-	public Hello create () throws RemoteException, CreateException;
-	
+public interface HelloRemote extends EJBObject, Hello {
 }

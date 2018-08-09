@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+        version="3.2"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/ejb-jar_3_2.xsd">
+
+	<enterprise-beans>
+		<session>
+			<session-type>Stateful</session-type>
+			<ejb-name>HelloBean</ejb-name>
+			<home>org.template.ejb.examples.ejb.interfaces.HelloHome</home>
+			<remote>org.template.ejb.examples.ejb.interfaces.HelloRemote</remote>
+			<ejb-class>org.template.ejb.examples.ejb.HelloBean</ejb-class>
+		</session>
+	</enterprise-beans>
+	
+</ejb-jar>
